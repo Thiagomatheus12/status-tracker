@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FacadeService } from '../../shared/services/facade.service';
 
 @Component({
   selector: 'app-create',
@@ -14,7 +15,9 @@ export class CreateComponent {
   form!: FormGroup;
 
   constructor(
+    private readonly facadeService: FacadeService
   ) {}
+
   ngOnInit(): void {
     this.initializeForm();
   }
@@ -41,16 +44,14 @@ export class CreateComponent {
     this.headers.push(headerGroup);
   }
 
-
-
   deleteHeader(index: number):void {
     this.headers.removeAt(index);
   }
 
   submit(): void {
-    if (this.form.valid) {
-      const request = this.form.value;
-      console.log(request);
-    }
+    const $adicionarAPI = this.facadeService.set(this.form.value);
+    $adicionarAPI.subscribe(() => {
+      alert('API adicionada com sucesso!');
+    })
   }
 }

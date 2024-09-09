@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MethodEnum } from '../../shared/enums/methodType.enum';
 import { Router, RouterModule } from '@angular/router';
+import { FacadeService } from '../../shared/services/facade.service';
 
 @Component({
   selector: 'app-list',
@@ -12,23 +13,31 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class ListComponent {
 
-  apis = [
-    { url: 'apixyw.com.br/api/v3', alias: 'API teste GET', metodo: MethodEnum.GET, id: 1 },
-    { url: 'apixyw.com.br/api/v3', alias: 'API teste DELETE', metodo: MethodEnum.DELETE, id: 2 },
-    { url: 'apixyw.com.br/api/v3', alias: 'API teste POST', metodo: MethodEnum.POST, id: 3 },
-    { url: 'apixyw.com.br/api/v3', alias: 'API teste PUT', metodo: MethodEnum.PUT, id: 4 },
-  ]
+  apis!: Array<any>
 
   constructor(
-    private router: Router
+    private router: Router,
+    private readonly facade: FacadeService
   ) { }
+
+  ngOnInit(): void {
+    this.getList();
+  }
+
+  getList(): void {
+    this.facade.getList().subscribe((res) => {
+      this.apis = res;
+    });
+  }
 
   edit(id: number): void {
     this.router.navigate([`edit/${id}`]);
   }
 
   exclude(id: number): void {
+    this.facade.delete(id).subscribe(() => {
 
+    })
   }
 
 }

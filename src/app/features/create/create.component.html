@@ -2,16 +2,16 @@
   <form class="form" [formGroup]="form" (ngSubmit)="submit()">
     <h3>Selecione o método:</h3>
     <div>
-      <input type="radio" id="get" name="method" value="get"  formControlName="method"/>
+      <input type="radio" id="get" name="method" value="GET"  formControlName="method"/>
       <label for="get">GET</label>
 
-      <input type="radio" id="post" name="method" value="post" formControlName="method"/>
+      <input type="radio" id="post" name="method" value="POST" formControlName="method"/>
       <label for="post">POST</label>
 
-      <input type="radio" id="put" name="method" value="put" formControlName="method"/>
+      <input type="radio" id="put" name="method" value="PUT" formControlName="method"/>
       <label for="put">PUT</label>
 
-      <input type="radio" id="delete" name="method" value="delete" formControlName="method"/>
+      <input type="radio" id="delete" name="method" value="DELETE" formControlName="method"/>
       <label for="delete">DELETE</label>
     </div>
 
