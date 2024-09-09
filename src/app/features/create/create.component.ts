@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
-import { CreateListApiService } from '../../../shared/services/create-list-api.service';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-create-list-api',
+  selector: 'app-create',
   standalone: true,
   imports: [FormsModule, CommonModule, ReactiveFormsModule],
-  templateUrl: './create-list-api.component.html',
-  styleUrl: './create-list-api.component.scss'
+  templateUrl: './create.component.html',
+  styleUrl: './create.component.scss'
 })
-export class CreateListApiComponent {
+export class CreateComponent {
 
   form!: FormGroup;
 
   constructor(
-    private readonly createListApiService: CreateListApiService
   ) {}
   ngOnInit(): void {
     this.initializeForm();

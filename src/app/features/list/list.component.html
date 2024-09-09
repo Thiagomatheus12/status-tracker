@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>Alias</th>
+      <th>Metodo</th>
+      <th>URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let api of apis">
+      <td>{{ api.alias }}</td>
+      <td>{{ api.metodo }}</td>
+      <td>{{ api.url }}</td>
+      <td (click)="edit(api.id)">Editar</td>
+      <td>Eliminar</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,4 +1,4 @@
-export enum methodType {
+export enum MethodEnum {
   GET = 1,
   POST = 2,
   PUT = 3,
