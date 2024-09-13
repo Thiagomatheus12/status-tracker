@@ -2,22 +2,22 @@
   <form class="form" [formGroup]="form" (ngSubmit)="submit()">
     <h3>Selecione o método:</h3>
     <div>
-      <input type="radio" id="get" name="method" value="GET"  formControlName="method"/>
+      <input type="radio" id="get" name="metodo" value="GET"  formControlName="metodo"/>
       <label for="get">GET</label>
 
-      <input type="radio" id="post" name="method" value="POST" formControlName="method"/>
+      <input type="radio" id="post" name="metodo" value="POST" formControlName="metodo"/>
       <label for="post">POST</label>
 
-      <input type="radio" id="put" name="method" value="PUT" formControlName="method"/>
+      <input type="radio" id="put" name="metodo" value="PUT" formControlName="metodo"/>
       <label for="put">PUT</label>
 
-      <input type="radio" id="delete" name="method" value="DELETE" formControlName="method"/>
+      <input type="radio" id="delete" name="metodo" value="DELETE" formControlName="metodo"/>
       <label for="delete">DELETE</label>
     </div>
 
     <div class="form__group">
-      <label for="name">Nome da API*</label>
-      <input type="text" formControlName="name" />
+      <label for="alias">Nome da API*</label>
+      <input type="text" formControlName="alias" />
     </div>
 
     <div class="form__group">
@@ -33,7 +33,7 @@
     <h4>Headers:</h4>
     <button type="button" (click)="addHeader()">+ Adicionar Header</button>
     <div formArrayName="headers">
-      <div class="form__group__header" *ngFor="let header of headers.controls; let i = index" [formGroupName]="i">
+      <div class="form__group__header" *ngFor="let header of cabecalho.controls; let i = index" [formGroupName]="i">
         <input type="text" formControlName="property" placeholder="Propriedade" />
         <input type="text" formControlName="value" placeholder="Valor" />
         <p (click)="deleteHeader(i)">Img delete</p>

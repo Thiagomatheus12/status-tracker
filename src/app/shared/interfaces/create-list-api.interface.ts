@@ -1,11 +1,11 @@
 export interface ICreateListApiInterface {
-  name: string;
+  nome: string;
   url: string;
-  body?: string;
-  method: string;
-  headers?: Array<
+  corpo?: string;
+  metodo: string;
+  cabecalho?: Array<
   {
-    property: string;
-    value: string;
+    propriedade: string;
+    valor: string;
   }>;
 }

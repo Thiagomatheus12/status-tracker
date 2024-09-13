@@ -24,32 +24,33 @@ export class CreateComponent {
 
   initializeForm(): void {
     this.form = new FormGroup({
-      name: new FormControl('', Validators.required),
+      alias: new FormControl('', Validators.required),
       url: new FormControl('', Validators.required),
-      body: new FormControl(''),
-      method: new FormControl('', Validators.required),
-      headers: new FormArray([])
+      corpo: new FormControl(''),
+      metodo: new FormControl('', Validators.required),
+      cabecalho: new FormArray([])
     });
   }
 
-  get headers(): FormArray {
-    return this.form.get('headers') as FormArray;
+  get cabecalho(): FormArray {
+    return this.form.get('cabecalho') as FormArray;
   }
 
   addHeader(): void {
     const headerGroup = new FormGroup({
-      property: new FormControl('', Validators.required),
-      value: new FormControl('', Validators.required),
+      propriedade: new FormControl('', Validators.required),
+      valor: new FormControl('', Validators.required),
     });
-    this.headers.push(headerGroup);
+    this.cabecalho.push(headerGroup);
   }
 
   deleteHeader(index: number):void {
-    this.headers.removeAt(index);
+    this.cabecalho.removeAt(index);
   }
 
   submit(): void {
     const $adicionarAPI = this.facadeService.set(this.form.value);
+    console.log(this.form.value)
     $adicionarAPI.subscribe(() => {
       alert('API adicionada com sucesso!');
     })

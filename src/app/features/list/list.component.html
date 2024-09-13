@@ -8,8 +8,8 @@
   </thead>
   <tbody>
     <tr *ngFor="let api of apis">
-      <td>{{ api.name }}</td>
-      <td>{{ api.method }}</td>
+      <td>{{ api.alias }}</td>
+      <td>{{ api.metodo }}</td>
       <td>{{ api.url }}</td>
       <td (click)="edit(api.id)">Editar</td>
       <td (click)="exclude(api.id)" >Eliminar</td>

@@ -26,6 +26,7 @@ export class ListComponent {
 
   getList(): void {
     this.facade.getList().subscribe((res) => {
+      console.log(res);
       this.apis = res;
     });
   }
@@ -36,7 +37,6 @@ export class ListComponent {
 
   exclude(id: number): void {
     this.facade.delete(id).subscribe(() => {
-
     })
   }
 
