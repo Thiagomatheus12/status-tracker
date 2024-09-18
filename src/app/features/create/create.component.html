@@ -26,16 +26,16 @@
     </div>
 
     <div class="form__group">
-      <label for="body">Body(opcional)</label>
-      <input type="text" formControlName="body" />
+      <label for="corpo">Body(opcional)</label>
+      <input type="text" formControlName="corpo" />
     </div>
 
     <h4>Headers:</h4>
     <button type="button" (click)="addHeader()">+ Adicionar Header</button>
-    <div formArrayName="headers">
+    <div formArrayName="cabecalho">
       <div class="form__group__header" *ngFor="let header of cabecalho.controls; let i = index" [formGroupName]="i">
-        <input type="text" formControlName="property" placeholder="Propriedade" />
-        <input type="text" formControlName="value" placeholder="Valor" />
+        <input type="text" formControlName="propriedade" placeholder="Propriedade" />
+        <input type="text" formControlName="valor" placeholder="Valor" />
         <p (click)="deleteHeader(i)">Img delete</p>
       </div>
     </div>
