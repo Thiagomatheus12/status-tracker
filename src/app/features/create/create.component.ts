@@ -2,11 +2,31 @@ import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FacadeService } from '../../shared/services/facade.service';
+import {TuiLabel} from '@taiga-ui/core';
+import {TuiRadio, TuiStatus} from '@taiga-ui/kit';
+import {TuiInputModule, TuiTextfieldControllerModule} from '@taiga-ui/legacy';
+import {TuiTextfield} from '@taiga-ui/core';
+import {TuiButton} from '@taiga-ui/core';
+import {TuiIcon, tuiIconResolverProvider, TuiIconPipe} from '@taiga-ui/core';
 
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+    TuiLabel,
+    TuiRadio,
+    TuiInputModule,
+    TuiButton,
+    TuiIcon,
+  ],
+  providers: [
+    tuiIconResolverProvider((icon) =>
+        icon.includes('/') ? icon : `/assets/icons/${icon}.svg`,
+    ),
+],
   templateUrl: './create.component.html',
   styleUrl: './create.component.scss'
 })

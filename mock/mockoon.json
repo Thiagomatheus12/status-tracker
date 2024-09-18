@@ -1,12 +1,22 @@
 {
-  "uuid": "ff768025-f76d-4ca8-90dd-ae3245d1e3ad",
-  "type": "crud",
-  "documentation": "",
-  "method": "",
-  "endpoint": "api",
-  "responses": [
-      {
-          "uuid": "f28176b6-120d-449b-8c48-b639737d2321",
+  "uuid": "6446a84f-ad4c-4d01-bbf9-f8f92ba2a20a",
+  "lastMigration": 32,
+  "name": "Mockoon",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "40bffafb-682f-46a4-8e58-260fac039083",
+      "type": "crud",
+      "documentation": "",
+      "method": "",
+      "endpoint": "api",
+      "responses": [
+        {
+          "uuid": "a2ed841f-f22d-43e6-b9ba-cf3ddbb5f1f0",
           "body": "{}",
           "latency": 0,
           "statusCode": 200,
@@ -14,7 +24,7 @@
           "headers": [],
           "bodyType": "DATABUCKET",
           "filePath": "",
-          "databucketID": "gi22",
+          "databucketID": "2ux8",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -23,7 +33,68 @@
           "default": true,
           "crudKey": "id",
           "callbacks": []
-      }
+        }
+      ],
+      "responseMode": null
+    }
   ],
-  "responseMode": null
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "40bffafb-682f-46a4-8e58-260fac039083"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [
+    {
+      "uuid": "538cafd6-f91d-48af-9052-51f085620c93",
+      "id": "2ux8",
+      "name": "Dados de API's",
+      "documentation": "",
+      "value": "[\n    {\n      \"id\": 1,\n      \"corpo\": \"que vai enviar body se tiver\",\n      \"url\": \"url da API\",\n      \"alias\": \"nome da API\",\n      \"metodo\": \"GET\",\n      \"cabecalho\": [\n        {\n          \"propriedade\": \"1\",\n          \"valor\": \"valorxyz\"\n        },\n        {\n          \"propriedade\": \"2\",\n          \"valor\": \"valorxyz\"\n        },\n        {\n          \"propriedade\": \"3\",\n          \"valor\": \"valorxyz\"\n        }\n      ]\n    },\n    {\n      \"id\": 2,\n      \"corpo\": \"que vai enviar body se tiver\",\n      \"url\": \"url da API\",\n      \"alias\": \"nome da API\",\n      \"metodo\": \"PATCH\",\n      \"cabecalho\": [\n        {\n          \"propriedade\": \"1\",\n          \"valor\": \"valorxyz\"\n        },\n        {\n          \"propriedade\": \"2\",\n          \"valor\": \"valorxyz\"\n        },\n        {\n          \"propriedade\": \"3\",\n          \"valor\": \"valorxyz\"\n        }\n      ]\n    },\n    {\n      \"id\": 3,\n      \"corpo\": \"que vai enviar body se tiver\",\n      \"url\": \"url da API\",\n      \"alias\": \"nome da API\",\n      \"metodo\": \"PUT\",\n      \"cabecalho\": [\n        {\n          \"propriedade\": \"1\",\n          \"valor\": \"valorxyz\"\n        },\n        {\n          \"propriedade\": \"2\",\n          \"valor\": \"valorxyz\"\n        },\n        {\n          \"propriedade\": \"3\",\n          \"valor\": \"valorxyz\"\n        }\n      ]\n    },\n    {\n      \"id\": 4,\n      \"corpo\": \"que vai enviar body se tiver\",\n      \"url\": \"url da API\",\n      \"alias\": \"nome da API\",\n      \"metodo\": \"DELETE\",\n      \"cabecalho\": [\n        {\n          \"propriedade\": \"1\",\n          \"valor\": \"valorxyz\"\n        },\n        {\n          \"propriedade\": \"2\",\n          \"valor\": \"valorxyz\"\n        },\n        {\n          \"propriedade\": \"3\",\n          \"valor\": \"valorxyz\"\n        }\n      ]\n    }\n  ]"
+    }
+  ],
+  "callbacks": []
 }

@@ -5,43 +5,35 @@
         <th tuiTh>Nome API</th>
         <th tuiTh>URL</th>
         <th tuiTh>Tipo</th>
-        <th tuiTh>Actions</th>
+        <th tuiTh>Ações</th>
       </tr>
     </thead>
     <tbody tuiTbody>
-      <tr *ngFor="let item of mockApiResponse">
+      <tr *ngFor="let item of data$ | async">
         <td tuiTd>
-          <span tuiTitle>
-            <span tuiSubtitle>{{ item.alias }}</span>
+          <span tuiStatus>{{ item.alias }}</span>
+        </td>
+        <td tuiTd>
+          <span tuiStatus>
+            {{ item.url }}
           </span>
         </td>
         <td tuiTd>
-          <span tuiTitle>
-            <span tuiStatus>
-              {{ item.url}}
-            </span>
+          <span tuiStatus>
+            {{ item.metodo }}
           </span>
         </td>
         <td tuiTd>
-          <span tuiTitle>
-            <span tuiStatus>
-              {{ item.metodo}}
-            </span>
-          </span>
-        </td>
-        <td tuiTd>
-          <span tuiTitle>
-            <span tuiStatus>
-              <button (click)="edit(item.id)" appearance="link" iconStart="@tui.pencil" size="xs" tuiIconButton
-                type="button">
-                Edit
-              </button>
+          <span tuiStatus>
+            <button (click)="edit(item.id)" appearance="link" iconStart="@tui.pencil" size="xs" tuiIconButton
+              type="button">
+              Edit
+            </button>
 
-              <button (click)="onClick(item.id)" appearance="link" iconStart="@tui.trash" size="xs" tuiIconButton
-                type="button">
-                More
-              </button>
-            </span>
+            <button (click)="onClick(item.id)" appearance="link" iconStart="@tui.ellipsis" size="xs" tuiIconButton
+              type="button">
+              More
+            </button>
           </span>
         </td>
       </tr>

@@ -13,7 +13,7 @@ export class FacadeService {
     return this.http.get('/api');
   }
 
-  get(id: number): Observable<any> {
+  get(id: string): Observable<any> {
     return this.http.get(`/api/${id}`);
   }
 
@@ -25,7 +25,7 @@ export class FacadeService {
     return this.http.put('/api', { id });
   }
 
-  delete(id: number): Observable<any> {
+  delete(id: string): Observable<any> {
     return this.http.delete(`/api/${id}`);
   }
 

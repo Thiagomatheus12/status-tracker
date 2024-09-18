@@ -3,38 +3,13 @@
   flex-direction: column;
   width: 100%;
 
-  &__group {
+  tui-input {
+    margin: 1rem 0;
+  }
+
+  &__radio {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 1rem;
-
-    label {
-      font-size: 1rem;
-      color: #444444;
-      text-transform: none;
-    }
-
-    input {
-      margin-top: 0.5rem;
-      background-color: #fff;
-      height: 50px;
-      font-size: .875rem;
-      color: #444444;
-      border: 1px solid #e5e5e5;
-      border-radius: 4px;
-      padding: 0 1rem;
-
-      &.disabled {
-        background-color: #e9ecef;
-        pointer-events: none;
-      }
-
-      &:focus-visible {
-        outline: 2px solid #C9DABF;
-        border-radius: 4px;
-      }
-    }
+    gap: 0.5rem;
   }
 
   &__headers {
@@ -48,6 +23,7 @@
   display: flex;
   gap: 1rem;
   margin: 1rem 0;
+  width: 100%;
   input {
     border: none;
     border-bottom: 1px solid #e5e5e5;
@@ -57,6 +33,10 @@
     &:focus-visible {
       outline: none;
     }
+  }
+
+  tui-icon {
+    cursor: pointer;
   }
 
   p {
@@ -72,16 +52,9 @@
 }
 
 button {
-  padding: 1rem;
-  border-radius: 20px;
-  background-color: #9ca986;
-  border: none;
-  outline: none;
   cursor: pointer;
   width: max-content;
-  color: #fff;
   margin-top: 1rem;
-
   &:disabled {
     background-color: darkgrey;
   }

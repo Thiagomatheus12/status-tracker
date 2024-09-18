@@ -1,38 +1,14 @@
 
 import { Router, RouterModule } from '@angular/router';
-
-import { NgForOf, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TuiTable } from '@taiga-ui/addon-table';
-import {
-  TuiAutoColorPipe,
-  TuiButton,
-  TuiDropdown,
-  TuiIcon,
-  TuiInitialsPipe,
-  TuiLink,
-  TuiTitle,
-  TuiAlertService,
-  TuiDialogService
-} from '@taiga-ui/core';
-import {
-  TuiAvatar,
-  TuiBadge,
-  TuiCheckbox,
-  TuiChip,
-  TuiItemsWithMore,
-  TuiProgressBar,
-  TuiRadioList,
-  TuiStatus,
-  TuiConfirmData
-
-} from '@taiga-ui/kit';
-import { TuiCell } from '@taiga-ui/layout';
+import { TuiButton, TuiAlertService, TuiDialogService } from '@taiga-ui/core';
+import { TuiStatus, TuiConfirmData } from '@taiga-ui/kit';
 import { FacadeService } from '../../shared/services/facade.service';
 import { TUI_CONFIRM } from '@taiga-ui/kit';
-import { TuiAsideItemDirective } from '@taiga-ui/layout';
-import { switchMap } from 'rxjs';
+import { BehaviorSubject, switchMap } from 'rxjs';
 import { ICreateListApiInterface } from '../../shared/interfaces/create-list-api.interface';
 
 @Component({
@@ -41,26 +17,9 @@ import { ICreateListApiInterface } from '../../shared/interfaces/create-list-api
   imports: [
     RouterModule,
     FormsModule,
-    NgForOf,
-    NgIf,
-    TuiAutoColorPipe,
-    TuiAvatar,
-    TuiBadge,
-    TuiButton,
-    TuiCell,
-    TuiCheckbox,
-    TuiChip,
-    TuiDropdown,
-    TuiIcon,
-    TuiInitialsPipe,
-    TuiItemsWithMore,
-    TuiLink,
-    TuiProgressBar,
-    TuiRadioList,
+    CommonModule,
     TuiStatus,
     TuiTable,
-    TuiTitle,
-    TuiAsideItemDirective,
     TuiButton
   ],
   templateUrl: './list.component.html',
@@ -69,7 +28,8 @@ import { ICreateListApiInterface } from '../../shared/interfaces/create-list-api
 })
 export class ListComponent {
 
-  data!: Array<ICreateListApiInterface>
+  private dataSubject = new BehaviorSubject<ICreateListApiInterface[]>([]);
+  data$ = this.dataSubject.asObservable();
 
   constructor(
     private router: Router,
@@ -84,23 +44,18 @@ export class ListComponent {
   }
 
   getList(): void {
-    this.facade.getList().subscribe((res) => {
-      console.log(res);
-      this.data = res;
-    });
+    this.facade.getList().subscribe((res) => this.dataSubject.next(res));
   }
 
-  edit(id: number): void {
+  edit(id: string): void {
     this.router.navigate([`edit/${id}`]);
   }
 
-  exclude(id: number): void {
-    this.facade.delete(id).subscribe(() => {
-    })
+  exclude(id: string): void {
+    this.facade.delete(id).subscribe().add(() => this.getList());
   }
 
-
-  protected onClick(id: number): void {
+  protected onClick(id: string): void {
     const data: TuiConfirmData = {
       content:'',
       yes: 'Sim',
@@ -117,7 +72,7 @@ export class ListComponent {
         switchMap((response) => {
           if (response) {
             this.exclude(id);
-            return this.alerts.open('API excluída com sucesso!');
+            return this.alerts.open('API excluída com sucesso!', { appearance: 'success' });
           } else {
             return this.alerts.open('Ação cancelada!');
           }
@@ -126,61 +81,4 @@ export class ListComponent {
       .subscribe();
   }
 
-  mockApiResponse: ICreateListApiInterface[] = [
-    {
-      id: 1,
-      alias: 'GetUser',
-      url: '/api/users/1',
-      corpo: undefined,
-      metodo: 'GET',
-      cabecalho: [
-        {
-          propriedade: 'Content-Type',
-          valor: 'application/json'
-        }
-      ]
-    },
-    {
-      id: 2,
-      alias: 'CreateUser',
-      url: '/api/users',
-      corpo: '{"name": "John Doe", "email": "john.doe@example.com"}',
-      metodo: 'POST',
-      cabecalho: [
-        {
-          propriedade: 'Content-Type',
-          valor: 'application/json'
-        },
-        {
-          propriedade: 'Authorization',
-          valor: 'Bearer token'
-        }
-      ]
-    },
-    {
-      id: 3,
-      alias: 'UpdateUser',
-      url: '/api/users/1',
-      corpo: '{"name": "Jane Doe"}',
-      metodo: 'PUT',
-      cabecalho: [
-        {
-          propriedade: 'Content-Type',
-          valor: 'application/json'
-        }
-      ]
-    },
-    {
-      id: 4,
-      alias: 'DeleteUser',
-      url: '/api/users/1',
-      metodo: 'DELETE',
-      cabecalho: [
-        {
-          propriedade: 'Authorization',
-          valor: 'Bearer token'
-        }
-      ]
-    }
-  ];
 }

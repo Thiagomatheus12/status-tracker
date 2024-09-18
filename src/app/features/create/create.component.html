@@ -1,48 +1,93 @@
 <div class="container">
   <form class="form" [formGroup]="form" (ngSubmit)="submit()">
     <h3>Selecione o método:</h3>
-    <div>
-      <input type="radio" id="get" name="metodo" value="GET"  formControlName="metodo"/>
-      <label for="get">GET</label>
-
-      <input type="radio" id="post" name="metodo" value="POST" formControlName="metodo"/>
-      <label for="post">POST</label>
-
-      <input type="radio" id="put" name="metodo" value="PUT" formControlName="metodo"/>
-      <label for="put">PUT</label>
-
-      <input type="radio" id="delete" name="metodo" value="DELETE" formControlName="metodo"/>
-      <label for="delete">DELETE</label>
+    <div class="form__radio">
+      <label tuiLabel>
+        <input
+          formControlName="metodo"
+          size="s"
+          tuiRadio
+          type="radio"
+          value="GET"
+        />
+        <small>GET</small>
+      </label>
+      <label tuiLabel>
+        <input
+          formControlName="metodo"
+          size="s"
+          tuiRadio
+          type="radio"
+          value="POST"
+        />
+        <small>POST</small>
+      </label>
+      <label tuiLabel>
+        <input
+          formControlName="metodo"
+          size="s"
+          tuiRadio
+          type="radio"
+          value="PUT"
+        />
+        <small>PUT</small>
+      </label>
+      <label tuiLabel>
+        <input
+          formControlName="metodo"
+          size="s"
+          tuiRadio
+          type="radio"
+          value="DELETE"
+        />
+        <small>DELETE</small>
+      </label>
     </div>
 
-    <div class="form__group">
-      <label for="alias">Nome da API*</label>
-      <input type="text" formControlName="alias" />
-    </div>
+    <tui-input formControlName="alias">
+      Nome da API*
+      <input placeholder="Digite o nome da sua API." tuiTextfieldLegacy />
+    </tui-input>
 
-    <div class="form__group">
-      <label for="url">URL*</label>
-      <input type="text" formControlName="url" />
-    </div>
+    <tui-input formControlName="url">
+      URL*
+      <input placeholder="Digite sua url." tuiTextfieldLegacy />
+    </tui-input>
 
-    <div class="form__group">
-      <label for="corpo">Body(opcional)</label>
-      <input type="text" formControlName="corpo" />
-    </div>
+    <tui-input formControlName="corpo">
+      Body(opcional)
+      <input placeholder="Digite o body." tuiTextfieldLegacy />
+    </tui-input>
 
-    <h4>Headers:</h4>
-    <button type="button" (click)="addHeader()">+ Adicionar Header</button>
+    <button (click)="addHeader()" size="m" tuiButton type="button">
+      <tui-icon icon="https://img.icons8.com/?size=100&id=84991&format=png&color=000000"/>
+      Adicionar Header
+    </button>
+
     <div formArrayName="cabecalho">
       <div class="form__group__header" *ngFor="let header of cabecalho.controls; let i = index" [formGroupName]="i">
-        <input type="text" formControlName="propriedade" placeholder="Propriedade" />
-        <input type="text" formControlName="valor" placeholder="Valor" />
-        <p (click)="deleteHeader(i)">Img delete</p>
+        <tui-input formControlName="propriedade">
+          Propriedade
+          <input placeholder="Propriedade." tuiTextfieldLegacy />
+        </tui-input>
+        <tui-input formControlName="valor">
+          Valor
+          <input placeholder="valor" tuiTextfieldLegacy />
+        </tui-input>
+
+        <button appearance="link" iconStart="@tui.pencil" size="xs" tuiIconButton
+        type="button">
+        Edit
+      </button>
+
+        <!-- <tui-icon (click)="deleteHeader(i)" icon="https://img.icons8.com/?size=100&id=85081&format=png&color=000000"/> -->
       </div>
     </div>
 
-
     <div>
-      <button type="submit" [disabled]="!form.valid">Enviar</button>
+      <button type="submit" size="m" tuiButton [disabled]="!form.valid">
+        Enviar
+      </button>
     </div>
   </form>
 </div>
