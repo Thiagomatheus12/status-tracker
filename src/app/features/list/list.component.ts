@@ -117,7 +117,7 @@ export class ListComponent {
         switchMap((response) => {
           if (response) {
             this.exclude(id);
-            return this.alerts.open('Item excluído com sucesso!');
+            return this.alerts.open('API excluída com sucesso!');
           } else {
             return this.alerts.open('Ação cancelada!');
           }
@@ -126,4 +126,61 @@ export class ListComponent {
       .subscribe();
   }
 
+  mockApiResponse: ICreateListApiInterface[] = [
+    {
+      id: 1,
+      alias: 'GetUser',
+      url: '/api/users/1',
+      corpo: undefined,
+      metodo: 'GET',
+      cabecalho: [
+        {
+          propriedade: 'Content-Type',
+          valor: 'application/json'
+        }
+      ]
+    },
+    {
+      id: 2,
+      alias: 'CreateUser',
+      url: '/api/users',
+      corpo: '{"name": "John Doe", "email": "john.doe@example.com"}',
+      metodo: 'POST',
+      cabecalho: [
+        {
+          propriedade: 'Content-Type',
+          valor: 'application/json'
+        },
+        {
+          propriedade: 'Authorization',
+          valor: 'Bearer token'
+        }
+      ]
+    },
+    {
+      id: 3,
+      alias: 'UpdateUser',
+      url: '/api/users/1',
+      corpo: '{"name": "Jane Doe"}',
+      metodo: 'PUT',
+      cabecalho: [
+        {
+          propriedade: 'Content-Type',
+          valor: 'application/json'
+        }
+      ]
+    },
+    {
+      id: 4,
+      alias: 'DeleteUser',
+      url: '/api/users/1',
+      metodo: 'DELETE',
+      cabecalho: [
+        {
+          propriedade: 'Authorization',
+          valor: 'Bearer token'
+        }
+      ]
+    }
+  ];
 }
