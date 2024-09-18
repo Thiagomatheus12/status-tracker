@@ -1,5 +1,6 @@
 export interface ICreateListApiInterface {
-  nome: string;
+  id: number;
+  alias: string;
   url: string;
   corpo?: string;
   metodo: string;

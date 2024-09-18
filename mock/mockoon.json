@@ -1,22 +1,12 @@
 {
-  "uuid": "60acdd3f-e781-4b29-b554-afd3e1af8196",
-  "lastMigration": 32,
-  "name": "Mockoon",
-  "endpointPrefix": "",
-  "latency": 0,
-  "port": 3000,
-  "hostname": "",
-  "folders": [],
-  "routes": [
-    {
-      "uuid": "7c4aa1d9-fbf3-43e6-a352-bdf527caf4fa",
-      "type": "crud",
-      "documentation": "",
-      "method": "",
-      "endpoint": "api",
-      "responses": [
-        {
-          "uuid": "6596b157-c87d-45f1-b478-6d98b18b0292",
+  "uuid": "ff768025-f76d-4ca8-90dd-ae3245d1e3ad",
+  "type": "crud",
+  "documentation": "",
+  "method": "",
+  "endpoint": "api",
+  "responses": [
+      {
+          "uuid": "f28176b6-120d-449b-8c48-b639737d2321",
           "body": "{}",
           "latency": 0,
           "statusCode": 200,
@@ -24,7 +14,7 @@
           "headers": [],
           "bodyType": "DATABUCKET",
           "filePath": "",
-          "databucketID": "oclj",
+          "databucketID": "gi22",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -33,69 +23,7 @@
           "default": true,
           "crudKey": "id",
           "callbacks": []
-        }
-      ],
-      "responseMode": null
-    }
+      }
   ],
-  "rootChildren": [
-    {
-      "type": "route",
-      "uuid": "7c4aa1d9-fbf3-43e6-a352-bdf527caf4fa"
-    }
-  ],
-  "proxyMode": false,
-  "proxyHost": "",
-  "proxyRemovePrefix": false,
-  "tlsOptions": {
-    "enabled": false,
-    "type": "CERT",
-    "pfxPath": "",
-    "certPath": "",
-    "keyPath": "",
-    "caPath": "",
-    "passphrase": ""
-  },
-  "cors": true,
-  "headers": [
-    {
-      "key": "Content-Type",
-      "value": "application/json"
-    },
-    {
-      "key": "Access-Control-Allow-Origin",
-      "value": "*"
-    },
-    {
-      "key": "Access-Control-Allow-Methods",
-      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-    },
-    {
-      "key": "Access-Control-Allow-Headers",
-      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-    }
-  ],
-  "proxyReqHeaders": [
-    {
-      "key": "",
-      "value": ""
-    }
-  ],
-  "proxyResHeaders": [
-    {
-      "key": "",
-      "value": ""
-    }
-  ],
-  "data": [
-    {
-      "uuid": "47b0ca3a-5fcb-42e3-a4c0-9c1e50bff48b",
-      "id": "oclj",
-      "name": "apis",
-      "documentation": "",
-      "value": "[\r\n  {{#repeat 3}}\r\n\r\n  {\r\n    \"id\": {{add @index 1}},\r\n    \"name\": \"{{faker 'person.firstName'}}\",\r\n    \"url\": \"{{faker 'internet.domainName'}}\",\r\n    \"method\": \"POST\",\r\n    \"body\": \"\",\r\n    \"headers\": [\r\n      { \"propriedade\": \"iv\", \"valor\": \"2123231\" }\r\n    ]\r\n  }\r\n    {{#unless @last}},{{/unless}}\r\n  {{/repeat}}\r\n]"
-    }
-  ],
-  "callbacks": []
+  "responseMode": null
 }
-

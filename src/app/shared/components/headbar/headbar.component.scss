@@ -11,3 +11,22 @@
     color: #FFF;
   }
 }
+
+.navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #515f49;
+  ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+
+    a {
+      color: #FFF;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}

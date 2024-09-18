@@ -1,4 +1,4 @@
-<table>
+<!-- <table>
   <thead>
     <tr>
       <th>Alias</th>
@@ -15,4 +15,60 @@
       <td (click)="exclude(api.id)" >Eliminar</td>
     </tr>
   </tbody>
-</table>
+</table> -->
+
+<!-- <div *ngFor="let api of data">
+teste
+ {{ api.url }}
+</div> -->
+
+<div class="container">
+  <table tuiTable>
+    <thead>
+      <tr>
+        <th tuiTh>Nome API</th>
+        <th tuiTh>URL</th>
+        <th tuiTh>Tipo</th>
+        <th tuiTh>Actions</th>
+      </tr>
+    </thead>
+    <tbody tuiTbody>
+      <tr *ngFor="let item of data">
+        <td tuiTd>
+          <span tuiTitle>
+            <span tuiSubtitle>{{ item.alias }}</span>
+          </span>
+        </td>
+        <td tuiTd>
+          <span tuiTitle>
+            <span tuiStatus>
+              {{ item.url}}
+            </span>
+          </span>
+        </td>
+        <td tuiTd>
+          <span tuiTitle>
+            <span tuiStatus>
+              {{ item.metodo}}
+            </span>
+          </span>
+        </td>
+        <td tuiTd>
+          <span tuiTitle>
+            <span tuiStatus>
+              <button (click)="edit(item.id)" appearance="link" iconStart="@tui.pencil" size="xs" tuiIconButton
+                type="button">
+                Edit
+              </button>
+
+              <button (click)="onClick(item.id)" appearance="link" iconStart="@tui.trash" size="xs" tuiIconButton
+                type="button">
+                More
+              </button>
+            </span>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
