@@ -3,43 +3,19 @@
     <h3>Selecione o método:</h3>
     <div class="form__radio">
       <label tuiLabel>
-        <input
-          formControlName="metodo"
-          size="s"
-          tuiRadio
-          type="radio"
-          value="GET"
-        />
+        <input formControlName="metodo" size="s" tuiRadio type="radio" value="GET" />
         <small>GET</small>
       </label>
       <label tuiLabel>
-        <input
-          formControlName="metodo"
-          size="s"
-          tuiRadio
-          type="radio"
-          value="POST"
-        />
+        <input formControlName="metodo" size="s" tuiRadio type="radio" value="POST" />
         <small>POST</small>
       </label>
       <label tuiLabel>
-        <input
-          formControlName="metodo"
-          size="s"
-          tuiRadio
-          type="radio"
-          value="PUT"
-        />
+        <input formControlName="metodo" size="s" tuiRadio type="radio" value="PUT" />
         <small>PUT</small>
       </label>
       <label tuiLabel>
-        <input
-          formControlName="metodo"
-          size="s"
-          tuiRadio
-          type="radio"
-          value="DELETE"
-        />
+        <input formControlName="metodo" size="s" tuiRadio type="radio" value="DELETE" />
         <small>DELETE</small>
       </label>
     </div>
@@ -60,7 +36,7 @@
     </tui-input>
 
     <button (click)="addHeader()" size="m" tuiButton type="button">
-      <tui-icon icon="https://img.icons8.com/?size=100&id=84991&format=png&color=000000"/>
+      <tui-icon icon="https://img.icons8.com/?size=100&id=84991&format=png&color=000000" />
       Adicionar Header
     </button>
 
@@ -75,12 +51,7 @@
           <input placeholder="valor" tuiTextfieldLegacy />
         </tui-input>
 
-        <button appearance="link" iconStart="@tui.pencil" size="xs" tuiIconButton
-        type="button">
-        Edit
-      </button>
-
-        <!-- <tui-icon (click)="deleteHeader(i)" icon="https://img.icons8.com/?size=100&id=85081&format=png&color=000000"/> -->
+        <tui-icon (click)="deleteHeader(i)" icon="@tui.trash" appearance="link"/>
       </div>
     </div>
 

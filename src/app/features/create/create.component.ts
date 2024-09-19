@@ -1,13 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FacadeService } from '../../shared/services/facade.service';
-import {TuiLabel} from '@taiga-ui/core';
-import {TuiRadio, TuiStatus} from '@taiga-ui/kit';
-import {TuiInputModule, TuiTextfieldControllerModule} from '@taiga-ui/legacy';
-import {TuiTextfield} from '@taiga-ui/core';
-import {TuiButton} from '@taiga-ui/core';
-import {TuiIcon, tuiIconResolverProvider, TuiIconPipe} from '@taiga-ui/core';
+import { TuiLabel } from '@taiga-ui/core';
+import { TuiRadio } from '@taiga-ui/kit';
+import { TuiInputModule } from '@taiga-ui/legacy';
+import { TuiButton, TuiIcon, TuiAlertService } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-create',
@@ -20,15 +18,11 @@ import {TuiIcon, tuiIconResolverProvider, TuiIconPipe} from '@taiga-ui/core';
     TuiRadio,
     TuiInputModule,
     TuiButton,
-    TuiIcon,
+    TuiIcon
   ],
-  providers: [
-    tuiIconResolverProvider((icon) =>
-        icon.includes('/') ? icon : `/assets/icons/${icon}.svg`,
-    ),
-],
   templateUrl: './create.component.html',
-  styleUrl: './create.component.scss'
+  styleUrl: './create.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateComponent {
 
@@ -36,7 +30,9 @@ export class CreateComponent {
 
   constructor(
     private readonly facadeService: FacadeService
-  ) {}
+  ) { }
+
+  private readonly alerts = inject(TuiAlertService);
 
   ngOnInit(): void {
     this.initializeForm();
@@ -64,7 +60,7 @@ export class CreateComponent {
     this.cabecalho.push(headerGroup);
   }
 
-  deleteHeader(index: number):void {
+  deleteHeader(index: number): void {
     this.cabecalho.removeAt(index);
   }
 
@@ -72,7 +68,14 @@ export class CreateComponent {
     const $adicionarAPI = this.facadeService.set(this.form.value);
     console.log(this.form.value)
     $adicionarAPI.subscribe(() => {
-      alert('API adicionada com sucesso!');
+      this.form.reset();
+      this.showNotification();
     })
+  }
+
+  showNotification(): void {
+    this.alerts
+      .open('<strong>API adicionada com sucesso!</strong>', { appearance: 'success' })
+      .subscribe();
   }
 }

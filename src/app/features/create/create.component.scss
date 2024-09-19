@@ -24,31 +24,15 @@
   gap: 1rem;
   margin: 1rem 0;
   width: 100%;
-  input {
-    border: none;
-    border-bottom: 1px solid #e5e5e5;
-    font-size: .875rem;
-    color: #444444;
+  align-items: center;
 
-    &:focus-visible {
-      outline: none;
-    }
+  tui-input {
+    width: 100%;
   }
 
   tui-icon {
     cursor: pointer;
   }
-
-  p {
-    cursor: pointer;
-    font-size: .875rem;
-    color: #444444;
-  }
-}
-
-.delete__all {
-  cursor: pointer;
-  color: red;
 }
 
 button {
