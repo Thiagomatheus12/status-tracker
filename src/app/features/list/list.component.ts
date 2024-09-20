@@ -32,11 +32,14 @@ import { ICreateListApiInterface } from '../../shared/interfaces/create-list-api
 })
 export class ListComponent {
 
-  private dataSubject = new BehaviorSubject<ICreateListApiInterface[]>([]);
+  private dataSubject: any = new BehaviorSubject<ICreateListApiInterface[]>([]);
   data$ = this.dataSubject.asObservable();
 
   isLoading = true;
 
+  headers = ['Nome API', 'URL', 'Tipo', 'Ações'];
+
+  properties = ['alias', 'url', 'metodo'];
 
   constructor(
     private router: Router,
