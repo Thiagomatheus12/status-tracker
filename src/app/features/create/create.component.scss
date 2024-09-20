@@ -4,7 +4,7 @@
   width: 100%;
 
   tui-input {
-    margin: 1rem 0;
+    margin-top: 1rem;
   }
 
   &__radio {
@@ -42,4 +42,8 @@ button {
   &:disabled {
     background-color: darkgrey;
   }
+}
+
+.error {
+  color: #ff8c67;
 }

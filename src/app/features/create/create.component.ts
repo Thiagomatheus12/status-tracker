@@ -6,6 +6,7 @@ import { TuiLabel } from '@taiga-ui/core';
 import { TuiRadio } from '@taiga-ui/kit';
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { TuiButton, TuiIcon, TuiAlertService } from '@taiga-ui/core';
+import { ValidatorsService } from '../../shared/services/validators.service';
 
 @Component({
   selector: 'app-create',
@@ -29,7 +30,8 @@ export class CreateComponent {
   form!: FormGroup;
 
   constructor(
-    private readonly facadeService: FacadeService
+    private readonly facadeService: FacadeService,
+    private readonly validatorsService: ValidatorsService
   ) { }
 
   private readonly alerts = inject(TuiAlertService);
@@ -41,7 +43,7 @@ export class CreateComponent {
   initializeForm(): void {
     this.form = new FormGroup({
       alias: new FormControl('', Validators.required),
-      url: new FormControl('', Validators.required),
+      url: new FormControl('', [Validators.required, this.validatorsService.urlValidator()]),
       corpo: new FormControl(''),
       metodo: new FormControl('', Validators.required),
       cabecalho: new FormArray([])

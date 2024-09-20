@@ -30,6 +30,10 @@
       <input placeholder="Digite sua url." tuiTextfieldLegacy />
     </tui-input>
 
+    <div class="error" *ngIf="form.get('url')?.hasError('invalidUrl') && form.get('url')?.touched">
+      *Digite uma URL valida.
+    </div>
+
     <tui-input formControlName="corpo">
       Body(opcional)
       <input placeholder="Digite o body." tuiTextfieldLegacy />

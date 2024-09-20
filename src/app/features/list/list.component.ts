@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TuiTable } from '@taiga-ui/addon-table';
-import { TuiButton, TuiAlertService, TuiDialogService } from '@taiga-ui/core';
-import { TuiStatus, TuiConfirmData } from '@taiga-ui/kit';
+import { TuiButton, TuiAlertService, TuiDialogService, TuiDataList, TuiDropdown, TuiIcon } from '@taiga-ui/core';
+import { TuiStatus, TuiConfirmData, TuiChevron } from '@taiga-ui/kit';
 import { FacadeService } from '../../shared/services/facade.service';
 import { TUI_CONFIRM } from '@taiga-ui/kit';
 import { BehaviorSubject, switchMap } from 'rxjs';
@@ -20,7 +20,11 @@ import { ICreateListApiInterface } from '../../shared/interfaces/create-list-api
     CommonModule,
     TuiStatus,
     TuiTable,
-    TuiButton
+    TuiButton,
+    TuiChevron,
+    TuiDataList,
+    TuiDropdown,
+    TuiIcon
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
@@ -30,6 +34,9 @@ export class ListComponent {
 
   private dataSubject = new BehaviorSubject<ICreateListApiInterface[]>([]);
   data$ = this.dataSubject.asObservable();
+
+  isLoading = true;
+
 
   constructor(
     private router: Router,
@@ -42,9 +49,11 @@ export class ListComponent {
   ngOnInit(): void {
     this.getList();
   }
-
   getList(): void {
-    this.facade.getList().subscribe((res) => this.dataSubject.next(res));
+    this.facade.getList().subscribe((res) => {
+      this.dataSubject.next(res);
+      this.isLoading = false;
+    });
   }
 
   edit(id: string): void {
@@ -55,7 +64,8 @@ export class ListComponent {
     this.facade.delete(id).subscribe().add(() => this.getList());
   }
 
-  protected onClick(id: string): void {
+  onClick(id: string): void {
+
     const data: TuiConfirmData = {
       content:'',
       yes: 'Sim',
@@ -79,6 +89,6 @@ export class ListComponent {
         })
       )
       .subscribe();
-  }
+    }
 
 }

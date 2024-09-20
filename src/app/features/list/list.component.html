@@ -25,15 +25,21 @@
         </td>
         <td tuiTd>
           <span tuiStatus>
-            <button (click)="edit(item.id)" appearance="link" iconStart="@tui.pencil" size="xs" tuiIconButton
-              type="button">
-              Edit
-            </button>
-
-            <button (click)="onClick(item.id)" appearance="link" iconStart="@tui.ellipsis" size="xs" tuiIconButton
-              type="button">
+            <button appearance="link" iconStart="@tui.ellipsis" size="xs" tuiIconButton tuiChevron tuiDropdownOpen
+              [tuiDropdown]="content" type="button">
               More
             </button>
+
+            <ng-template #content>
+              <tui-data-list role="menu">
+                <tui-opt-group>
+                  <a role="menuitemradio" tuiOption (click)="exclude(item.id)">Excluir</a>
+                  <a role="menuitemradio" tuiOption>Visualizar</a>
+                  <a role="menuitemradio" tuiOption (click)="edit(item.id)">Editar</a>
+                </tui-opt-group>
+              </tui-data-list>
+            </ng-template>
+
           </span>
         </td>
       </tr>
