@@ -8,7 +8,7 @@ import { TuiButton, TuiAlertService, TuiDialogService, TuiDataList, TuiDropdown,
 import { TuiStatus, TuiConfirmData, TuiChevron } from '@taiga-ui/kit';
 import { FacadeService } from '../../shared/services/facade.service';
 import { TUI_CONFIRM } from '@taiga-ui/kit';
-import { BehaviorSubject, switchMap } from 'rxjs';
+import { BehaviorSubject, finalize, switchMap } from 'rxjs';
 import { ICreateListApiInterface } from '../../shared/interfaces/create-list-api.interface';
 
 @Component({
@@ -28,7 +28,7 @@ import { ICreateListApiInterface } from '../../shared/interfaces/create-list-api
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
 })
 export class ListComponent {
 
@@ -52,12 +52,13 @@ export class ListComponent {
   ngOnInit(): void {
     this.getList();
   }
+
   getList(): void {
-    this.facade.getList().subscribe((res) => {
-      this.dataSubject.next(res);
-      this.isLoading = false;
-    });
+    this.facade.getList().subscribe((res) => this.dataSubject.next(res)).add(() => this.isLoading = false);
   }
+
+
+
 
   edit(id: string): void {
     this.router.navigate([`edit/${id}`]);

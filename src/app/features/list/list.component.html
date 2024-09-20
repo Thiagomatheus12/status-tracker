@@ -1,39 +1,45 @@
+@defer (when !isLoading) {
 <div class="container">
-  <table tuiTable>
-    <thead>
-      <tr>
-        @for (header of headers; track header) {
+  <div class="container">
+    <table tuiTable>
+      <thead>
+        <tr>
+          @for (header of headers; track header) {
           <th tuiTh>{{ header }}</th>
-        }
-      </tr>
-    </thead>
-    <tbody tuiTbody>
-      <tr *ngFor="let item of data$ | async">
-
-        @for (property of properties; track property) {
+          }
+        </tr>
+      </thead>
+      <tbody tuiTbody>
+        <tr *ngFor="let item of data$ | async">
+          @for (property of properties; track property) {
           <td tuiTd>{{ item[property] }}</td>
-        }
+          }
 
-        <td tuiTd>
-          <span tuiStatus>
-            <button appearance="link" iconStart="@tui.ellipsis" size="xs" tuiIconButton tuiChevron tuiDropdownOpen
-              [tuiDropdown]="content" type="button">
-              More
-            </button>
+          <td tuiTd>
+            <span tuiStatus>
+              <button appearance="link" iconStart="@tui.ellipsis" size="xs" tuiIconButton tuiChevron tuiDropdownOpen
+                [tuiDropdown]="content" type="button">
+                More
+              </button>
 
-            <ng-template #content>
-              <tui-data-list role="menu">
-                <tui-opt-group>
-                  <a role="menuitemradio" tuiOption (click)="exclude(item.id)">Excluir</a>
-                  <a role="menuitemradio" tuiOption>Visualizar</a>
-                  <a role="menuitemradio" tuiOption (click)="edit(item.id)">Editar</a>
-                </tui-opt-group>
-              </tui-data-list>
-            </ng-template>
-          </span>
-        </td>
+              <ng-template #content>
+                <tui-data-list role="menu">
+                  <tui-opt-group>
+                    <a role="menuitemradio" tuiOption (click)="exclude(item.id)">Excluir</a>
+                    <a role="menuitemradio" tuiOption>Visualizar</a>
+                    <a role="menuitemradio" tuiOption (click)="edit(item.id)">Editar</a>
+                  </tui-opt-group>
+                </tui-data-list>
+              </ng-template>
+            </span>
+          </td>
 
-      </tr>
-    </tbody>
-  </table>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
+}@placeholder {
+carregando...
+}
