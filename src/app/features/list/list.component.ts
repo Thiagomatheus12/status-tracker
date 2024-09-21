@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TuiTable } from '@taiga-ui/addon-table';
-import { TuiButton, TuiAlertService, TuiDialogService, TuiDataList, TuiDropdown, TuiIcon } from '@taiga-ui/core';
+import { TuiButton, TuiAlertService, TuiDialogService, TuiDataList, TuiDropdown, TuiIcon, TuiLoader, tuiLoaderOptionsProvider } from '@taiga-ui/core';
 import { TuiStatus, TuiConfirmData, TuiChevron } from '@taiga-ui/kit';
 import { FacadeService } from '../../shared/services/facade.service';
 import { TUI_CONFIRM } from '@taiga-ui/kit';
@@ -24,10 +24,12 @@ import { ICreateListApiInterface } from '../../shared/interfaces/create-list-api
     TuiChevron,
     TuiDataList,
     TuiDropdown,
-    TuiIcon
+    TuiIcon,
+    TuiLoader
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
+  providers: [tuiLoaderOptionsProvider({size: 'xl'})],
 
 })
 export class ListComponent {
