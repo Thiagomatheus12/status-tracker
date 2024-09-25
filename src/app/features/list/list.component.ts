@@ -59,9 +59,6 @@ export class ListComponent {
     this.facade.getList().subscribe((res) => this.dataSubject.next(res)).add(() => this.isLoading = false);
   }
 
-
-
-
   edit(id: string): void {
     this.router.navigate([`edit/${id}`]);
   }

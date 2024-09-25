@@ -21,8 +21,8 @@ export class FacadeService {
     return this.http.post('/api', data);
   }
 
-  update(id: string): Observable<any> {
-    return this.http.put('/api', { id });
+  update(id: string, body: any): Observable<any> {
+    return this.http.put(`/api/${id}`, body);
   }
 
   delete(id: string): Observable<any> {

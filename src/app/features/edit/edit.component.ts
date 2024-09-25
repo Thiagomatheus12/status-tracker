@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { FacadeService } from '../../shared/services/facade.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CreateComponent } from "../create/create.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [],
+  imports: [CreateComponent, CommonModule],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss'
 })
 export class EditComponent {
 
-  data: any
+  data: any;
 
   constructor(
     private readonly facade: FacadeService,
