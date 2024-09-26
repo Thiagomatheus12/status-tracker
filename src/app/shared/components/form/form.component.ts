@@ -1,14 +1,18 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TuiLabel } from '@taiga-ui/core';
 import { TuiRadio } from '@taiga-ui/kit';
 import { TuiInputModule } from '@taiga-ui/legacy';
-import { TuiButton, TuiIcon, TuiAlertService } from '@taiga-ui/core';
-import { Router } from '@angular/router';
-import { FacadeService } from '../../services/facade.service';
-import { ValidatorsService } from '../../services/validators.service';
-
+import { TuiButton, TuiIcon } from '@taiga-ui/core';
+import { FormService } from '../../services/form.service';
 
 @Component({
   selector: 'app-form',
@@ -21,117 +25,26 @@ import { ValidatorsService } from '../../services/validators.service';
     TuiRadio,
     TuiInputModule,
     TuiButton,
-    TuiIcon
+    TuiIcon,
   ],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.scss'
+  styleUrl: './form.component.scss',
 })
 export class FormComponent {
 
-  /**
-   * API a ser editada.
-   */
-  @Input() itemToEdit: any;
+  @Input() form!: FormGroup; // Recebe o form do parent
 
-  /**
-   * Itens a serem visualizados.
-   */
-  @Input() viewForm: any;
+  constructor(private readonly formService: FormService) {}
 
-  /**
-   * Formulário recebido.
-   */
-  @Output() formSubmit = new EventEmitter<any>();
-
-  /**
-   * Formulário que armazenará as API's.
-   */
-  form!: FormGroup;
-
-  /**
-   * Construtor da classe.
-   * @param validatorsService Serviço de validações.
-   */
-  constructor(
-    private readonly validatorsService: ValidatorsService
-  ) { }
-
-  /**
-  * Chamada no ngOnInit para inicializar o componente.
-  */
-  ngOnInit(): void {
-    this.initializeForm();
-    this.verifyEdit();
+  addHeader(): void {
+    this.formService.addHeader(this.cabecalho);
   }
 
-  /**
-   * Função que verifica se deve editar ou criar um formulário.
-   */
-  verifyEdit(): void {
-    if (this.itemToEdit) {
-      console.log('edit', this.itemToEdit)
-      this.form.patchValue(this.itemToEdit);
-      this.populateHeaders(this.itemToEdit.cabecalho);
-    }
+  deleteHeader(index: number): void {
+    this.formService.deleteHeader(this.cabecalho, index);
   }
 
-
-  /**
-   * Função que inicializa o formulário.
-   */
-  initializeForm(): void {
-    this.form = new FormGroup({
-      alias: new FormControl('', Validators.required),
-      webhook: new FormControl('', Validators.required),
-      url: new FormControl('', [Validators.required, this.validatorsService.urlValidator()]),
-      corpo: new FormControl(''),
-      metodo: new FormControl('', Validators.required),
-      cabecalho: new FormArray([])
-    });
-  }
-
-  /**
-   * Função que retorna o grupo de campos de formulário chamado "cabecalho".
-   */
   get cabecalho(): FormArray {
     return this.form.get('cabecalho') as FormArray;
-  }
-
-  /**
-   * Função que adiciona headers ao formulário.
-   */
-  addHeader(): void {
-    const headerGroup = new FormGroup({
-      propriedade: new FormControl('', Validators.required),
-      valor: new FormControl('', Validators.required),
-    });
-    this.cabecalho.push(headerGroup);
-  }
-
-  /**
-  * Deleta itens do header através do índice.
-  * @param index Índice do header.
-  */
-  deleteHeader(index: number): void {
-    this.cabecalho.removeAt(index);
-  }
-
-  populateHeaders(headers: any[]): void {
-    this.cabecalho.clear();
-    headers.forEach((header: any) => {
-      const headerGroup = new FormGroup({
-        propriedade: new FormControl(header.propriedade, Validators.required),
-        valor: new FormControl(header.valor, Validators.required),
-      });
-      this.cabecalho.push(headerGroup);
-    });
-  }
-
-  /**
-   * Função para verifica qual fluxo seguir: editar ou criar uma API.
-   */
-  submit(): void {
-    this.formSubmit.emit(this.form.value); // Emitir o formulário ao criar item
-    this.form.reset();
   }
 }

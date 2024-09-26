@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="form" [formGroup]="form" (ngSubmit)="submit()" >
+  <form class="form" [formGroup]="form" >
     <h3>Selecione o método:</h3>
     <div class="form__radio">
       <label tuiLabel>
@@ -62,12 +62,6 @@
 
         <tui-icon (click)="deleteHeader(i)" icon="@tui.trash" appearance="link"/>
       </div>
-    </div>
-
-    <div>
-      <button type="submit" size="m" tuiButton [disabled]="!form.valid">
-        Enviar
-      </button>
     </div>
   </form>
 </div>

@@ -1,1 +1,4 @@
-<app-form (formSubmit)="createItem($event)"/>
+<app-form [form]="form"/>
+<div class="container">
+  <button type="submit" size="m" tuiButton [disabled]="this.form.invalid" (click)="submitForm()">Enviar</button>
+</div>
