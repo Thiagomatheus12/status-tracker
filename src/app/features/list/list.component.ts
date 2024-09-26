@@ -67,6 +67,10 @@ export class ListComponent {
     this.facade.delete(id).subscribe().add(() => this.getList());
   }
 
+  viewForm(id: string): void {
+    this.router.navigate([`view/${id}`]);
+  }
+
   onClick(id: string): void {
 
     const data: TuiConfirmData = {

@@ -1,0 +1,49 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  tui-input {
+    margin-top: 1rem;
+  }
+
+  &__radio {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__headers {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+
+.form__group__header {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  width: 100%;
+  align-items: center;
+
+  tui-input {
+    width: 100%;
+  }
+
+  tui-icon {
+    cursor: pointer;
+  }
+}
+
+button {
+  cursor: pointer;
+  width: max-content;
+  margin-top: 1rem;
+  &:disabled {
+    background-color: darkgrey;
+  }
+}
+
+.error {
+  color: #ff8c67;
+}

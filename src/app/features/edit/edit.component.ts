@@ -3,11 +3,13 @@ import { FacadeService } from '../../shared/services/facade.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CreateComponent } from "../create/create.component";
 import { CommonModule } from '@angular/common';
+import { FormComponent } from "../../shared/components/form/form.component";
+import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [CreateComponent, CommonModule],
+  imports: [CreateComponent, CommonModule, FormComponent],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss'
 })
@@ -16,8 +18,10 @@ export class EditComponent {
   data: any;
 
   constructor(
-    private readonly facade: FacadeService,
-    private readonly route: ActivatedRoute
+    private readonly facadeService: FacadeService,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly modalService: ModalService
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +29,7 @@ export class EditComponent {
   }
 
   getData(): void {
-    this.facade.get(this.id).subscribe((res) => {
+    this.facadeService.get(this.id).subscribe((res) => {
       this.data = res;
     });
   }
@@ -34,4 +38,15 @@ export class EditComponent {
     return this.route.snapshot.paramMap.get('id')!;
   }
 
+  /**
+ * Função para editar uma API da lista.
+ * @param formData Dados do formulário emitidos pelo FormComponent.
+ */
+  updateItem(formData: any): void {
+    const $atualizarAPI = this.facadeService.update(this.id, formData);
+    $atualizarAPI.subscribe(() => {
+      this.router.navigate(['/list']);
+      this.modalService.showAlert('API atualizada com sucesso!');
+    });
+  }
 }

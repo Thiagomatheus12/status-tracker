@@ -26,7 +26,7 @@
                 <tui-data-list role="menu">
                   <tui-opt-group>
                     <a role="menuitemradio" tuiOption (click)="exclude(item._id)">Excluir</a>
-                    <a role="menuitemradio" tuiOption>Visualizar</a>
+                    <a role="menuitemradio" tuiOption (click)="viewForm(item._id)">Visualizar</a>
                     <a role="menuitemradio" tuiOption (click)="edit(item._id)">Editar</a>
                   </tui-opt-group>
                 </tui-data-list>

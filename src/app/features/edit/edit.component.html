@@ -1,1 +1,1 @@
-<app-create *ngIf="data" [itemToEdit]="data"/>
+<app-form *ngIf="data" [itemToEdit]="data" (formSubmit)="updateItem($event)"/>
