@@ -1,0 +1,8 @@
+button {
+  cursor: pointer;
+  width: max-content;
+  margin-top: 1rem;
+  &:disabled {
+    background-color: darkgrey;
+  }
+}

@@ -44,7 +44,7 @@
       <input placeholder="Digite o body." tuiTextfieldLegacy />
     </tui-input>
 
-    <button (click)="addHeader()" size="m" tuiButton type="button">
+    <button [disabled]="modeView" (click)="addHeader()" size="m" tuiButton type="button">
       <tui-icon icon="https://img.icons8.com/?size=100&id=84991&format=png&color=000000" />
       Adicionar Header
     </button>
@@ -60,7 +60,7 @@
           <input placeholder="valor" tuiTextfieldLegacy />
         </tui-input>
 
-        <tui-icon (click)="deleteHeader(i)" icon="@tui.trash" appearance="link"/>
+        <tui-icon *ngIf="!modeView" (click)="deleteHeader(i)" icon="@tui.trash" appearance="link" />
       </div>
     </div>
   </form>

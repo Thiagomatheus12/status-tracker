@@ -28,10 +28,10 @@ export class CreateComponent {
   }
 
   submitForm(): void {
-    console.log(this.form.value);
     const $adicionarAPI = this.facadeService.set(this.form.value);
     $adicionarAPI.subscribe(() => {
       this.modalService.showAlert('API adicionada com sucesso!');
+      this.form.reset();
     });
   }
 }

@@ -5,12 +5,14 @@ import { CreateComponent } from "../create/create.component";
 import { CommonModule } from '@angular/common';
 import { FormComponent } from "../../shared/components/form/form.component";
 import { ModalService } from '../../shared/services/modal.service';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
+import { FormService } from '../../shared/services/form.service';
+import { TuiButton } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [CreateComponent, CommonModule, FormComponent],
+  imports: [CreateComponent, CommonModule, FormComponent, TuiButton],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss'
 })
@@ -18,70 +20,67 @@ export class EditComponent {
 
   form!: FormGroup;
 
-  data: any;
-
   constructor(
     private readonly facadeService: FacadeService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly modalService: ModalService
+    private readonly modalService: ModalService,
+    private readonly formService: FormService
   ) { }
 
   ngOnInit(): void {
     this.getData();
-    // this.form = this.formService.initializeForm();
+    this.form = this.formService.initializeForm();
   }
 
+  /**
+   * função que resgata os dados recebidos e preenche o formulário.
+   */
   getData(): void {
+
     this.facadeService.get(this.id).subscribe((res) => {
-      this.data = res;
+      this.form.patchValue({
+        alias: res.alias,
+        webhook: res.webhook,
+        url: res.url,
+        corpo: res.corpo,
+        metodo: res.metodo,
+      });
+      if (res.cabecalho && res.cabecalho.length > 0) {
+        const cabecalhoArray = this.form.get('cabecalho') as FormArray;
+        cabecalhoArray.clear();
+        res.cabecalho.forEach((header: any) => {
+          this.formService.addHeader(cabecalhoArray);
+          const index = cabecalhoArray.length - 1;
+          cabecalhoArray.at(index).patchValue({
+            propriedade: header.propriedade,
+            valor: header.valor
+          });
+        });
+      }
     });
   }
 
+    /**
+   * Atualiza o formulário quando o componente filho emite a mudança.
+   */
+    onFormChange(updatedForm: FormGroup): void {
+      this.form = updatedForm;
+    }
+
+
+/**
+ * Get que resgata o ID.
+ */
   get id(): string {
     return this.route.snapshot.paramMap.get('id')!;
   }
 
-    /**
-   * Inicializa o formulário e carrega dados se disponíveis.
-   */
-  // initializeForm(): void {
-  //   this.form = new FormGroup({
-  //     alias: new FormControl(this.formData?.alias || '', Validators.required),
-  //     webhook: new FormControl(this.formData?.webhook || '', Validators.required),
-  //     url: new FormControl(
-  //       this.formData?.url || '',
-  //       [Validators.required, this.validatorsService.urlValidator()]
-  //     ),
-  //     corpo: new FormControl(this.formData?.corpo || ''),
-  //     metodo: new FormControl(this.formData?.metodo || '', Validators.required),
-  //     cabecalho: new FormArray([]),
-  //   });
-
-  //   if (this.formData?.cabecalho) {
-  //     this.loadHeaders(this.formData.cabecalho);
-  //   }
-
-  //   this.form.valueChanges.subscribe(value => {
-  //     this.formDataChange.emit(value); // Emite as mudanças no formulário
-  //   });
-  // }
-
   /**
-   * Carrega os cabeçalhos no formulário.
+   * Submit do formulário.
    */
-  // loadHeaders(headers: any[]): void {
-  //   headers.forEach(header => {
-  //     this.addHeader(header.propriedade, header.valor);
-  //   });
-  // }
-
-  /**
- * Função para editar uma API da lista.
- * @param formData Dados do formulário emitidos pelo FormComponent.
- */
-  handleSubmit(formData: any): void {
-    const $atualizarAPI = this.facadeService.update(this.id, formData);
+  submitForm(): void {
+    const $atualizarAPI = this.facadeService.update(this.id, this.form.value);
     $atualizarAPI.subscribe(() => {
       this.router.navigate(['/list']);
       this.modalService.showAlert('API atualizada com sucesso!');

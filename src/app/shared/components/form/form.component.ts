@@ -1,12 +1,5 @@
-import { Component, Input } from '@angular/core';
-import {
-  FormArray,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormArray, FormGroup, FormsModule, ReactiveFormsModule, } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TuiLabel } from '@taiga-ui/core';
 import { TuiRadio } from '@taiga-ui/kit';
@@ -34,7 +27,17 @@ export class FormComponent {
 
   @Input() form!: FormGroup; // Recebe o form do parent
 
-  constructor(private readonly formService: FormService) {}
+  @Input() modeView!: boolean;
+
+  // Emite as mudanças do formulário de volta para o componente pai
+  @Output() formChange = new EventEmitter<FormGroup>();
+
+  constructor(private readonly formService: FormService) { }
+
+  // Função para emitir as mudanças
+  onFormChange(): void {
+    this.formChange.emit(this.form);
+  }
 
   addHeader(): void {
     this.formService.addHeader(this.cabecalho);

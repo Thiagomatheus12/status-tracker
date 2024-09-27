@@ -1,4 +1,4 @@
-<app-form [form]="form"/>
+<app-form [(form)]="form" [modeView]="false"/>
 <div class="container">
   <button type="submit" size="m" tuiButton [disabled]="this.form.invalid" (click)="submitForm()">Enviar</button>
 </div>

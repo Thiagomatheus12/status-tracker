@@ -1,14 +1,14 @@
 
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TuiTable } from '@taiga-ui/addon-table';
 import { TuiButton, TuiAlertService, TuiDialogService, TuiDataList, TuiDropdown, TuiIcon, TuiLoader, tuiLoaderOptionsProvider } from '@taiga-ui/core';
 import { TuiStatus, TuiConfirmData, TuiChevron } from '@taiga-ui/kit';
 import { FacadeService } from '../../shared/services/facade.service';
 import { TUI_CONFIRM } from '@taiga-ui/kit';
-import { BehaviorSubject, finalize, switchMap } from 'rxjs';
+import { BehaviorSubject, switchMap } from 'rxjs';
 import { ICreateListApiInterface } from '../../shared/interfaces/create-list-api.interface';
 
 @Component({
@@ -59,17 +59,19 @@ export class ListComponent {
     this.facade.getList().subscribe((res) => this.dataSubject.next(res)).add(() => this.isLoading = false);
   }
 
-  edit(id: string): void {
-    this.router.navigate([`edit/${id}`]);
-  }
-
   exclude(id: string): void {
     this.facade.delete(id).subscribe().add(() => this.getList());
+  }
+
+  edit(id: string): void {
+    this.router.navigate([`edit/${id}`]);
   }
 
   viewForm(id: string): void {
     this.router.navigate([`view/${id}`]);
   }
+
+
 
   onClick(id: string): void {
 
