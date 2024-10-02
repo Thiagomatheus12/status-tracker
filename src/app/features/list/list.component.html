@@ -1,5 +1,4 @@
 @defer (when !isLoading) {
-<div class="container">
   <div class="container">
     <table tuiTable>
       <thead>
@@ -22,7 +21,7 @@
                 More
               </button>
 
-              <ng-template #content>
+              <ng-template #content  >
                 <tui-data-list role="menu">
                   <tui-opt-group>
                     <a role="menuitemradio" tuiOption (click)="exclude(item._id)">Excluir</a>
@@ -39,7 +38,8 @@
     </table>
   </div>
 
-</div>
 }@placeholder() {
-  <tui-loader />
+  <div class="container">
+    <app-list-shimmer />
+  </div>
 }

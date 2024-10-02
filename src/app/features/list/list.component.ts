@@ -1,15 +1,16 @@
 
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TuiTable } from '@taiga-ui/addon-table';
-import { TuiButton, TuiAlertService, TuiDialogService, TuiDataList, TuiDropdown, TuiIcon, TuiLoader, tuiLoaderOptionsProvider } from '@taiga-ui/core';
-import { TuiStatus, TuiConfirmData, TuiChevron } from '@taiga-ui/kit';
+import { TuiButton, TuiDataList, TuiDropdown, TuiIcon, tuiLoaderOptionsProvider } from '@taiga-ui/core';
+import { TuiStatus, TuiChevron, TuiSkeleton } from '@taiga-ui/kit';
 import { FacadeService } from '../../shared/services/facade.service';
-import { TUI_CONFIRM } from '@taiga-ui/kit';
-import { BehaviorSubject, switchMap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ICreateListApiInterface } from '../../shared/interfaces/create-list-api.interface';
+import { ListShimmerComponent } from "./list-shimmer/list-shimmer.component";
+import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
   selector: 'app-list',
@@ -25,8 +26,9 @@ import { ICreateListApiInterface } from '../../shared/interfaces/create-list-api
     TuiDataList,
     TuiDropdown,
     TuiIcon,
-    TuiLoader
-  ],
+    TuiSkeleton,
+    ListShimmerComponent
+],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
   providers: [tuiLoaderOptionsProvider({size: 'xl'})],
@@ -45,11 +47,9 @@ export class ListComponent {
 
   constructor(
     private router: Router,
-    private readonly facade: FacadeService
+    private readonly facade: FacadeService,
+    private readonly modalService: ModalService
   ) { }
-
-  private readonly dialogs = inject(TuiDialogService);
-  private readonly alerts = inject(TuiAlertService);
 
   ngOnInit(): void {
     this.getList();
@@ -60,7 +60,10 @@ export class ListComponent {
   }
 
   exclude(id: string): void {
-    this.facade.delete(id).subscribe().add(() => this.getList());
+    this.facade.delete(id).subscribe().add(() =>{
+      this.modalService.showAlert('API excluída com sucesso!');
+      this.getList()
+    });
   }
 
   edit(id: string): void {
@@ -70,34 +73,4 @@ export class ListComponent {
   viewForm(id: string): void {
     this.router.navigate([`view/${id}`]);
   }
-
-
-
-  onClick(id: string): void {
-
-    const data: TuiConfirmData = {
-      content:'',
-      yes: 'Sim',
-      no: 'Não',
-    };
-
-    this.dialogs
-      .open<boolean>(TUI_CONFIRM, {
-        label: 'Deseja realmente excluir?',
-        size: 's',
-        data,
-      })
-      .pipe(
-        switchMap((response) => {
-          if (response) {
-            this.exclude(id);
-            return this.alerts.open('API excluída com sucesso!', { appearance: 'success' });
-          } else {
-            return this.alerts.open('Ação cancelada!');
-          }
-        })
-      )
-      .subscribe();
-    }
-
 }

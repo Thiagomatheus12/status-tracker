@@ -1,0 +1,17 @@
+<table tuiTable>
+  <thead>
+    <tr>
+      @for (header of headers; track header) {
+      <th tuiTh>{{ header }}</th>
+      }
+    </tr>
+  </thead>
+  <thead>
+    <tr [tuiSkeleton]="true">
+      @for (header of headers; track header) {
+      <th tuiTh>{{ header }}</th>
+      }
+    </tr>
+  </thead>
+
+</table>
