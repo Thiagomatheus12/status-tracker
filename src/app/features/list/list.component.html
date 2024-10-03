@@ -1,6 +1,6 @@
 @defer (when !isLoading) {
   <div class="container">
-    <table tuiTable>
+    <table tuiTable *ngIf="hasList()">
       <thead>
         <tr>
           @for (header of headers; track header) {

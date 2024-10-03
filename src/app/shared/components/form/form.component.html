@@ -39,7 +39,7 @@
       <input placeholder="Digite o hebhook." tuiTextfieldLegacy />
     </tui-input>
 
-    <tui-input formControlName="corpo">
+    <tui-input formControlName="corpo" *ngIf="hasBody()">
       Body(opcional)
       <input placeholder="Digite o body." tuiTextfieldLegacy />
     </tui-input>

@@ -59,10 +59,17 @@ export class ListComponent {
     this.facade.getList().subscribe((res) => this.dataSubject.next(res)).add(() => this.isLoading = false);
   }
 
+  hasList(): boolean {
+    const data = this.dataSubject.value
+    return data.length > 0
+  }
+
   exclude(id: string): void {
+    let novoArray = this.dataSubject.value;
     this.facade.delete(id).subscribe().add(() =>{
+      novoArray = novoArray.filter((api: any) => api._id !== id);
+      this.dataSubject.next(novoArray);
       this.modalService.showAlert('API excluída com sucesso!');
-      this.getList()
     });
   }
 

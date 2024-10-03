@@ -43,6 +43,10 @@ export class FormComponent {
     this.formService.addHeader(this.cabecalho);
   }
 
+  hasBody(): boolean {
+    return this.form.get('metodo')?.value !== 'GET'
+  }
+
   deleteHeader(index: number): void {
     this.formService.deleteHeader(this.cabecalho, index);
   }
