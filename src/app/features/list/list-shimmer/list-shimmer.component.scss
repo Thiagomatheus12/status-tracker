@@ -2,4 +2,8 @@ table {
   width: 100%;
   margin-top: 1rem;
 }
-
+  @media (max-width: 767px) {
+    table {
+      display: none;
+    }
+  }

@@ -32,10 +32,11 @@
               </ng-template>
             </span>
           </td>
-
         </tr>
       </tbody>
     </table>
+
+    <app-list-mobile [data]="data$" (itemDeleted)="exclude($event)"/>
   </div>
 
 }@placeholder() {

@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ICreateListApiInterface } from '../../shared/interfaces/create-list-api.interface';
 import { ListShimmerComponent } from "./list-shimmer/list-shimmer.component";
 import { ModalService } from '../../shared/services/modal.service';
+import { ListMobileComponent } from "../list-mobile/list-mobile.component";
 
 @Component({
   selector: 'app-list',
@@ -27,7 +28,8 @@ import { ModalService } from '../../shared/services/modal.service';
     TuiDropdown,
     TuiIcon,
     TuiSkeleton,
-    ListShimmerComponent
+    ListShimmerComponent,
+    ListMobileComponent
 ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
@@ -47,7 +49,7 @@ export class ListComponent {
 
   constructor(
     private router: Router,
-    private readonly facade: FacadeService,
+    private readonly facadeService: FacadeService,
     private readonly modalService: ModalService
   ) { }
 
@@ -56,7 +58,7 @@ export class ListComponent {
   }
 
   getList(): void {
-    this.facade.getList().subscribe((res) => this.dataSubject.next(res)).add(() => this.isLoading = false);
+    this.facadeService.getList().subscribe((res) => this.dataSubject.next(res)).add(() => this.isLoading = false);
   }
 
   hasList(): boolean {
@@ -66,7 +68,7 @@ export class ListComponent {
 
   exclude(id: string): void {
     let novoArray = this.dataSubject.value;
-    this.facade.delete(id).subscribe().add(() =>{
+    this.facadeService.delete(id).subscribe().add(() =>{
       novoArray = novoArray.filter((api: any) => api._id !== id);
       this.dataSubject.next(novoArray);
       this.modalService.showAlert('API excluída com sucesso!');
