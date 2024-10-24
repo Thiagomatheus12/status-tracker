@@ -11,5 +11,8 @@ import { TuiTable } from '@taiga-ui/addon-table';
 })
 export class ListShimmerComponent {
 
+  /**
+   * Cabeçalho da tabela.
+   */
   headers = ['Nome API', 'URL', 'Tipo', 'Ações'];
 }

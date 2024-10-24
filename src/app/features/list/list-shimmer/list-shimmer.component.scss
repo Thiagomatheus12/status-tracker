@@ -2,8 +2,20 @@ table {
   width: 100%;
   margin-top: 1rem;
 }
-  @media (max-width: 767px) {
-    table {
-      display: none;
-    }
+
+section {
+  margin: 1rem;
+  border-radius: 8px;
+  display: none;
+}
+@media (max-width: 767px) {
+  table {
+    display: none;
   }
+
+  section {
+    display: block;
+  }
+}
+
+

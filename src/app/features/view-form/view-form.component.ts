@@ -13,14 +13,26 @@ import { FormArray, FormGroup } from '@angular/forms';
   styleUrl: './view-form.component.scss'
 })
 export class ViewFormComponent {
+  /**
+   * Dados do formulário.
+   */
   form!: FormGroup;
 
+  /**
+   * Construtor da classe.
+   * @param facadeService Serviço de lista.
+   * @param route Serviço de rotas.
+   * @param formService Serviço de formulário.
+   */
   constructor(
     private readonly facadeService: FacadeService,
     private readonly route: ActivatedRoute,
     private readonly formService: FormService
   ) { }
 
+  /**
+   * Inicializa o componente.
+   */
   ngOnInit(): void {
     this.form = this.formService.initializeForm();
     this.getData();

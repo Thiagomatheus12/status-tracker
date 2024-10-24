@@ -18,8 +18,18 @@ import { TuiButton } from '@taiga-ui/core';
 })
 export class EditComponent {
 
+  /**
+   * Dados do formulário.
+   */
   form!: FormGroup;
 
+  /**
+   * Construtor da classe.
+   * @param facadeService Serviço de lista.
+   * @param route Serviço de rotas.
+   * @param modalService Serviço de modal.
+   * @param formService Serviço de formulário.
+   */
   constructor(
     private readonly facadeService: FacadeService,
     private readonly route: ActivatedRoute,
@@ -28,6 +38,10 @@ export class EditComponent {
     private readonly formService: FormService
   ) { }
 
+
+  /**
+   * Inicializa o componente.
+   */
   ngOnInit(): void {
     this.getData();
     this.form = this.formService.initializeForm();
@@ -37,7 +51,6 @@ export class EditComponent {
    * função que resgata os dados recebidos e preenche o formulário.
    */
   getData(): void {
-
     this.facadeService.get(this.id).subscribe((res) => {
       this.form.patchValue({
         alias: res.alias,

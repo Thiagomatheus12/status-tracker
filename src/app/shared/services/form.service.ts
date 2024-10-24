@@ -7,8 +7,16 @@ import { ValidatorsService } from './validators.service';
 })
 export class FormService {
 
+  /**
+   * Construtor da classe.
+   * @param validatorsService Serviço de validação.
+   */
   constructor(private readonly validatorsService: ValidatorsService) { }
 
+  /**
+   * Inicializa o formulário.
+   * @returns Retorna o formulário.
+   */
   initializeForm(): FormGroup {
       return new FormGroup({
       alias: new FormControl('', Validators.required),
