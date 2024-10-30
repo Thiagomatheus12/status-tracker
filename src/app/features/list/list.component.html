@@ -1,5 +1,8 @@
 @if (total === 0) {
-<p>Não encontramos nenhuma API a ser monitorada.</p>
+<div class="container">
+  <p>Não encontramos nenhuma API a ser monitorada.</p>
+</div>
+
 }
 
 @if (!isLoading) {
@@ -49,6 +52,6 @@
 
 } @else {
 <div>
-  <app-list-shimmer />
+  <div class="container"> <app-list-shimmer /></div>
 </div>
 }
